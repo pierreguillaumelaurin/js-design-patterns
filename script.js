@@ -1,17 +1,28 @@
-
-var clickCountModel = 0;
-var catPictureContainer = document.getElementById('cat-picture-container');
-var clickCountView = document.getElementById('click-count');
-clickCountView.innerHTML = clickCountModel;
-
-function addClick() {
-  clickCountModel += 1;
-  clickCountView.innerHTML = clickCountModel;
+function Cat(name,path){
+	this.name=name;
+	this.path=path;
+	this.count=0;
+	this.nameText=document.createElement('h2');
+	this.nameText.innerHTML=this.name;
+	this.bottomText=document.createElement('h3');
+	this.bottomText.innerHTML="Clicked " +this.count + " times";
+	this.img=new Image();
+	this.img.addEventListener('click', this.handler.bind(this), false);
+	this.img.src=this.path;
+	document.body.appendChild(this.nameText);
+	document.body.appendChild(this.img);
+	document.body.appendChild(this.bottomText);
 }
 
+Cat.prototype={
+	constructor:Cat,
+	handler:function(){
+		this.count++;
+		this.bottom.innerHTML='Clicked '+thiscount+' times';
+	}
+}
 
-catPictureContainer.addEventListener('click', addClick);
-
-
+var cat1 = new Cat('cat1', 'pics/cat1.jpg');
+var cat2 = new Cat('cat2', 'pics/cat2.jpg');
 
 
