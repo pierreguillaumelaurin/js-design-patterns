@@ -1,4 +1,7 @@
+var cats = [];
+
 function Cat(name,path){
+	var self = this;
 	this.name=name;
 	this.path=path;
 	this.count=0;
@@ -9,20 +12,42 @@ function Cat(name,path){
 	this.img=new Image();
 	this.img.addEventListener('click', this.handler.bind(this), false);
 	this.img.src=this.path;
+	this.appendCat = function appendCat() {
+		cats.push(name);
+	}
 	document.body.appendChild(this.nameText);
 	document.body.appendChild(this.img);
 	document.body.appendChild(this.bottomText);
+	this.appendCat;
+	
 }
+
 
 Cat.prototype={
 	constructor:Cat,
 	handler:function(){
 		this.count++;
-		this.bottom.innerHTML='Clicked '+thiscount+' times';
+		this.bottomText.innerHTML='Clicked '+this.count+' times';
 	}
 }
 
-var cat1 = new Cat('cat1', 'pics/cat1.jpg');
-var cat2 = new Cat('cat2', 'pics/cat2.jpg');
+function list(name, obj){
+	var self = this;
+	var contentText = document.createElement('ul');
+	this.name = name;
+	this.nameText = document.createElement('h1');
+	this.obj = obj;
+	document.body.appendChild(this.nameText);
+	document.body.appendChild(this.contentText);
+}
+
+var list = new list('list of Cats');
+var cat1 = new Cat('cat1', 'img-bin/tibouchon.jpg');
+var cat2 = new Cat('cat2', 'img-bin/tibouchon.jpg');
+alert(cats.length);
+
+//find a way to build a list of cats
+//add selection
+//keep each cats number separate
 
 
