@@ -18,7 +18,7 @@ function Cat(name,path){
 	document.body.appendChild(this.nameText);
 	document.body.appendChild(this.img);
 	document.body.appendChild(this.bottomText);
-	this.appendCat;
+	this.appendCat();
 	
 }
 
@@ -35,16 +35,28 @@ function list(name, obj){
 	var self = this;
 	var contentText = document.createElement('ul');
 	this.name = name;
-	this.nameText = document.createElement('h1');
+	this.nameText = document.createElement('h1');;
 	this.obj = obj;
 	document.body.appendChild(this.nameText);
 	document.body.appendChild(this.contentText);
 }
 
-var list = new list('list of Cats');
+list.prototype.appendObjects = function appendObjects(obj){
+		li = [];
+		for(var i;i < obj.length;i++) {
+      li.push('<li>'+ obj[i] + '</li>');
+		}
+		return li;
+		this.contentText.innerHTML = this.appendObjects(obj)
+	};
+
+//var listOfCats = new list('list of Cats', cats);
 var cat1 = new Cat('cat1', 'img-bin/tibouchon.jpg');
 var cat2 = new Cat('cat2', 'img-bin/tibouchon.jpg');
-alert(cats.length);
+var cat3 = new Cat('cat2', 'img-bin/tibouchon.jpg');
+var cat4 = new Cat('cat2', 'img-bin/tibouchon.jpg');
+var cat5 = new Cat('cat2', 'img-bin/tibouchon.jpg');
+//listOfCats.appendObjects(cats);
 
 //find a way to build a list of cats
 //add selection
