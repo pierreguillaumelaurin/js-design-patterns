@@ -21,9 +21,18 @@ catController = function(model,view){
 	this.view.nameText.innerHTML= model.name;
 	this.view.img.src = model.picture;
 	this.view.bottomText.innerHTML="Clicked " + this.model.count + " times";
+	this.view.img.addEventListener('click', this.handler.bind(this), false);
 	document.body.appendChild(this.view.nameText);
 	document.body.appendChild(this.view.img);
 	document.body.appendChild(this.view.bottomText);
+}
+
+catController.prototype={
+	constructor: catController,
+	handler: function(){
+		this.model.count++;
+    this.view.bottomText.innerHTML="Clicked " + this.model.count + " times";
+	}
 }
 
 
