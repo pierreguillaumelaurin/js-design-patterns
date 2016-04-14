@@ -20,6 +20,7 @@ var catController = {
 
 	incrementCounter: function(model) {
     model.count++;
+    catView.render();
 	},
 	setCurrentCat: function(cat){
 		catList.currentCat= cat;
@@ -37,19 +38,18 @@ var catView = {
   
   // add event listener
 	this.picture.addEventListener('click', function(){
-		catController.incrementCounter();
+		catController.incrementCounter(catList.currentCat);
 	});
 
 	//call render fnction
 	console.log(catList.currentCat.picturePath);
-	this.render(catList.currentCat);
+	this.render();
 	},
 
-	render: function(current){
-    this.name.textContent = current.name;
-    this.picture.src = current.picturePath;
-    console.log(current.picturePath.src);
-    this.bottomtext.textContent = "Clicked " + current.count + " times.";
+	render: function(){
+    this.name.textContent = catList.currentCat.name;
+    this.picture.src = catList.currentCat.picturePath;
+    this.bottomtext.textContent = "Clicked " + catList.currentCat.count + " times.";
 
 	}
 
