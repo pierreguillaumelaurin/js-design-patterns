@@ -38,7 +38,7 @@ var catView = {
   // add event listener
 	this.picture.addEventListener('click', function(){
 		catController.incrementCounter();
-	})
+	});
 
 	//call render fnction
 	console.log(catList.currentCat.picturePath);
