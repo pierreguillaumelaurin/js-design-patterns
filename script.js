@@ -1,9 +1,9 @@
 var catList = [];
 
-var catModel = function(name, picture, count){
+var catModel = function(name, picturePath, count){
 	var self = this;
 	this.name = name;
-	this.picture = picture;
+	this.picturePath = picturePath;
 	if (typeof count === 'undefined') { count = 0; };
 	this.count = count;
 	//append cat to list of cat
@@ -20,6 +20,9 @@ var catController = {
 
 	incrementCounter: function(model) {
     model.count++;
+	},
+	setCurrentCat: function(cat){
+		catList.currentCat= cat;
 	}
 }
 
@@ -38,14 +41,15 @@ var catView = {
 	})
 
 	//call render fnction
-	this.render(cat1);
+	console.log(catList.currentCat.picturePath);
+	this.render(catList.currentCat);
 	},
 
-	render: function(currentCat){
-    this.name.textContent = currentCat.name;
-    this.picture.src = currentCat.picture;
-    console.log(this.picture.src);
-    this.bottomtext.textContent = "Clicked " + currentCat.count + " times.";
+	render: function(current){
+    this.name.textContent = current.name;
+    this.picture.src = current.picturePath;
+    console.log(current.picturePath.src);
+    this.bottomtext.textContent = "Clicked " + current.count + " times.";
 
 	}
 
@@ -79,9 +83,8 @@ var cat4 = new catModel('cat4', 'img-bin/tibouchon.jpg');
 var cat5 = new catModel('cat5', 'img-bin/tibouchon.jpg');
 
 //initiate currentCat
-var currentCat = catList[0];
-console.log('currentCat: '+currentCat);
-console.log('currentCat: '+catList);
+catList.currentCat = catList[0];
+console.log('currentCat: '+catList.currentCat);
 
 //start app by initiating controller
 catController.init();
