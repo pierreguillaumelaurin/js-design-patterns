@@ -42,7 +42,6 @@ var catView = {
 	});
 
 	//call render fnction
-	console.log(catList.currentCat.picturePath);
 	this.render();
 	},
 
@@ -66,8 +65,6 @@ var listView = {
 			newListElement.appendChild(document.createTextNode(e.name));
 			list.appendChild(newListElement);
 		}
-		console.log(catList[i]);
-    console.log('function addListElement: '+ addListElement(catList[i], 'cat-list'));
 		addListElement(catList[i], 'cat-list');
 
     }
@@ -84,7 +81,6 @@ var cat5 = new catModel('cat5', 'img-bin/tibouchon.jpg');
 
 //initiate currentCat
 catList.currentCat = catList[0];
-console.log('currentCat: '+catList.currentCat);
 
 //start app by initiating controller
 catController.init();
