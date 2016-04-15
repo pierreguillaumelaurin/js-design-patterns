@@ -1,0 +1,9 @@
+-add some html (admin button, form w/ name, img-url and clicks, cancel, save)
+
+-view: initadmin function that adds event listener to admin mode 
+
+-octopus: function for opening the view, function for closing the view, function to update the current cat with the new values
+
+-listView: reset admin button to false if it was selected
+
+?-model: property for true or false?

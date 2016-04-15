@@ -23,9 +23,46 @@ var catController = {
     model.count++;
     catView.render();
 	},
+
 	setCurrentCat: function(cat){
 		catList.currentCat= cat;
-	}
+	},
+  //catList commands
+	addListElement: function (e, id) {
+			//in other context this is an optional part of the function
+		  var list = document.getElementById(id);
+			var newListElement = document.createElement('li');
+			newListElement.appendChild(document.createTextNode(e.name));
+			list.appendChild(newListElement);
+			return newListElement;
+		},
+  //adminForm commands
+	showAdminForm: function(){
+		  console.log('showAdminForm is ON!');
+			this.adminForm = document.getElementById('admin-form');
+			this.adminForm.style.visibility='visible';
+	    
+		},
+
+  hideAdminForm: function() {
+  	  console.log('hideAdminForm is ON!')
+			this.adminForm = document.getElementById('admin-form');
+			this.adminForm.style.visibility='hidden';
+		},
+
+	switchAdminForm: function(){
+	  if(adminView.selected === false){
+	  	this.showAdminForm();
+	  	adminView.selected = true;
+	  }
+	  else if(adminView.selected === true){
+	  	this.hideAdminForm();
+	  	adminView.selected = false;
+	  }
+	  else {
+	  	alert('error with the switch button :(')
+	  };
+  }
 }
 
 var catView = {
@@ -57,11 +94,14 @@ var catView = {
 //view of elements to modify cat
 var adminView = {
 	init: function() {
-		this.adminform = document.getElementById('admin-form');
-		this.render();
-	},
-	render: function() {
-		this.adminform.style.visibility='hidden';
+		//set selected property to false
+		this.selected = false;
+		//add event listener to admin button
+		this.adminButton = document.getElementById('admin-button');
+		this.adminButton.addEventListener('click',function(){catController.switchAdminForm()},false);
+		//hide admin form
+		catController.hideAdminForm();
+		
 	}
 }
 
@@ -79,17 +119,11 @@ var listView = {
   	for (var i = 0;i < catList.length;i++) {
     
     cat = catList[i];
-
-		function addListElement(e, id) {
-			//in other context this is an optional part of the function
-		  var list = document.getElementById(id);
-			var newListElement = document.createElement('li');
-			newListElement.appendChild(document.createTextNode(e.name));
-			list.appendChild(newListElement);
-			return newListElement;
-		}
     
-    var listElement = addListElement(cat, 'cat-list')
+    //refactor by putting this into the controller
+		
+    
+    var listElement = catController.addListElement(cat, 'cat-list')
     // changes the view to the selected cat in the list
 		
 		listElement.addEventListener('click',(function(catCopy) {
