@@ -27,6 +27,20 @@ var catController = {
 	setCurrentCat: function(cat){
 		catList.currentCat= cat;
 	},
+
+	updateCurrentCat: function(){
+		//assign variables to DOM form elements
+		var name= document.getElementsByName('name');
+		var newPicturePath = document.getElementsByName('picture-path');
+		var catClicks = document.getElementsByName('cat-clicks');
+		//replace if element variable doesn't equal undefined, could be refactored with a for loop
+		if (typeof name !== 'undefined') { catList.currentCat.name = name};
+		if (typeof newPicturePath !== 'undefined') { catList.currentCat.picturePath = newPicturePath};
+		if (typeof catClicks !== 'undefined') { catList.currentCat.count = catClicks};
+		console.log('name: '+ catList.currentCat.name + 'clicks: '+ catList.currentCat.count);
+		//update the view with new properties
+		catView.render();
+	},
   //catList commands
 	addListElement: function (e, id) {
 			//in other context this is an optional part of the function
@@ -38,14 +52,12 @@ var catController = {
 		},
   //adminForm commands
 	showAdminForm: function(){
-		  console.log('showAdminForm is ON!');
 			this.adminForm = document.getElementById('admin-form');
 			this.adminForm.style.visibility='visible';
 	    
 		},
 
   hideAdminForm: function() {
-  	  console.log('hideAdminForm is ON!')
 			this.adminForm = document.getElementById('admin-form');
 			this.adminForm.style.visibility='hidden';
 		},
@@ -53,6 +65,7 @@ var catController = {
 	switchAdminForm: function(){
 	  if(adminView.selected === false){
 	  	this.showAdminForm();
+	  	adminView.activateSubmitButton();
 	  	adminView.selected = true;
 	  }
 	  else if(adminView.selected === true){
@@ -102,7 +115,13 @@ var adminView = {
 		//hide admin form
 		catController.hideAdminForm();
 		
-	}
+	},
+
+	activateSubmitButton: function() {
+  	submitButton = document.getElementById('submit-button');
+  	submitButton.addEventListener('click',function(){catController.updateCurrentCat()},false);
+  }
+
 }
 
 var listView = {
@@ -133,10 +152,8 @@ var listView = {
       	catView.render();
       };
     }(cat)));
-    }
-
-    
-  }
+    }   
+  },
 }
 
   
