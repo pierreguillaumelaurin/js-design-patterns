@@ -57,37 +57,37 @@ var catView = {
 var listView = {
 	// store pointer to DOM elements for easy access later
 	init: function() {
-	for(var i = 0;i < catList.length;i++) {
+	  this.catlist = document.getElementById('cat-list');
+	  this.render();
+  },
+  render: function() {
+
+  	//empty the cat list
+		catList.innerHTML = '';
+
+  	for (var i = 0;i < catList.length;i++) {
+    
+    cat = catList[i];
 
 		function addListElement(e, id) {
 			//in other context this is an optional part of the function
-			function addClass(e, name){
-      e.classList.add(name);
-		}
 		  var list = document.getElementById(id);
 			var newListElement = document.createElement('li');
 			newListElement.appendChild(document.createTextNode(e.name));
 			list.appendChild(newListElement);
-      addClass(newListElement,'catlist-element')
-			
+			return newListElement;
 		}
-
+    
+    var listElement = addListElement(cat, 'cat-list')
+    // changes the view to the selected cat in the list
 		
-		addListElement(catList[i], 'cat-list');
-    }
-    this.render();
-  },
-  render: function() {
-  	// changes the view to the selected cat in the list
-    var list = document.getElementsByClassName("catlist-element");
-    for(var i= 0;i < list.length; i++){
-    	console.log(list[i]);
-      list[i].addEventListener('click', function(listCopy) {
-    	return function(){
-    	catController.setCurrentCat(listCopy[i]);
-    	catView.render();
-    };
-    })(list);
+		listElement.addEventListener('click',(function(catCopy) {
+      	return function() {
+      	console.log('add event listener: '+catCopy);
+      	catController.setCurrentCat(catCopy);
+      	catView.render();
+      };
+    }(cat)));
     }
 
     
@@ -98,10 +98,10 @@ var listView = {
 
 //initiate cat variables
 var cat1 = new catModel('cat1', 'img-bin/tibouchon.jpg');
-var cat2 = new catModel('cat2', 'img-bin/tibouchon.jpg');
-var cat3 = new catModel('cat3', 'img-bin/tibouchon.jpg');
-var cat4 = new catModel('cat4', 'img-bin/tibouchon.jpg');
-var cat5 = new catModel('cat5', 'img-bin/tibouchon.jpg');
+var cat2 = new catModel('cat2', 'img-bin/black-cat.jpg');
+var cat3 = new catModel('cat3', 'img-bin/black-cat.jpg');
+var cat4 = new catModel('cat4', 'img-bin/black-cat.jpg');
+var cat5 = new catModel('cat5', 'img-bin/black-cat.jpg');
 
 //initiate currentCat
 catList.currentCat = catList[0];
