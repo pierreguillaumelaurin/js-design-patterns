@@ -15,6 +15,7 @@ var catModel = function(name, picturePath, count){
 var catController = {
 	init: function() {
 	catView.init();
+	adminView.init();
 	listView.init();
   },
 
@@ -52,6 +53,16 @@ var catView = {
 
 	}
 
+}
+//view of elements to modify cat
+var adminView = {
+	init: function() {
+		this.adminform = document.getElementById('admin-form');
+		this.render();
+	},
+	render: function() {
+		this.adminform.style.visibility='hidden';
+	}
 }
 
 var listView = {
@@ -99,9 +110,9 @@ var listView = {
 //initiate cat variables
 var cat1 = new catModel('cat1', 'img-bin/tibouchon.jpg');
 var cat2 = new catModel('cat2', 'img-bin/black-cat.jpg');
-var cat3 = new catModel('cat3', 'img-bin/black-cat.jpg');
+var cat3 = new catModel('cat3', 'img-bin/computer-cat.jpg');
 var cat4 = new catModel('cat4', 'img-bin/black-cat.jpg');
-var cat5 = new catModel('cat5', 'img-bin/black-cat.jpg');
+var cat5 = new catModel('cat5', 'img-bin/computer-cat.jpg');
 
 //initiate currentCat
 catList.currentCat = catList[0];
