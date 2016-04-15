@@ -60,16 +60,40 @@ var listView = {
 	for(var i = 0;i < catList.length;i++) {
 
 		function addListElement(e, id) {
+			//in other context this is an optional part of the function
+			function addClass(e, name){
+      e.classList.add(name);
+		}
 		  var list = document.getElementById(id);
 			var newListElement = document.createElement('li');
 			newListElement.appendChild(document.createTextNode(e.name));
 			list.appendChild(newListElement);
+      addClass(newListElement,'catlist-element')
+			
 		}
-		addListElement(catList[i], 'cat-list');
 
+		
+		addListElement(catList[i], 'cat-list');
     }
+    this.render();
+  },
+  render: function() {
+  	// changes the view to the selected cat in the list
+    var list = document.getElementsByClassName("catlist-element");
+    for(var i= 0;i < list.length; i++){
+    	console.log(list[i]);
+      list[i].addEventListener('click', function(listCopy) {
+    	return function(){
+    	catController.setCurrentCat(listCopy[i]);
+    	catView.render();
+    };
+    })(list);
+    }
+
+    
   }
 }
+
   
 
 //initiate cat variables
