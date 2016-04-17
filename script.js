@@ -30,17 +30,20 @@ var catController = {
 
 	updateCurrentCat: function(){
 		//assign variables to DOM form elements
-		var name= document.getElementsByName('name');
-		var newPicturePath = document.getElementsByName('picture-path');
-		var catClicks = document.getElementsByName('cat-clicks');
+		var name= document.getElementById('catname').value;
+		var newPicturePath = document.getElementById('picture-path').value;
+		var catClicks = document.getElementById('cat-clicks').value;
+
+		console.log('name '+ name + 'newPicturePath '+ newPicturePath + 'cat-clicks ' + catClicks);
+
 		//replace if element variable doesn't equal undefined, could be refactored with a for loop
-		if (typeof name !== 'undefined') { catList.currentCat.name = name};
-		if (typeof newPicturePath !== 'undefined') { catList.currentCat.picturePath = newPicturePath};
-		if (typeof catClicks !== 'undefined') { catList.currentCat.count = catClicks};
-		console.log('name: '+ catList.currentCat.name + 'clicks: '+ catList.currentCat.count);
+		if (typeof name !== 'null') { catList.currentCat.name = name};
+		if (typeof newPicturePath !== 'null') { catList.currentCat.picturePath = newPicturePath};
+		if (typeof catClicks !== 'null') { catList.currentCat.count = catClicks};
 		//update the view with new properties
 		catView.render();
 	},
+
   //catList commands
 	addListElement: function (e, id) {
 			//in other context this is an optional part of the function
@@ -118,8 +121,9 @@ var adminView = {
 	},
 
 	activateSubmitButton: function() {
+		console.log('activateSubmitButton is ON!');
   	submitButton = document.getElementById('submit-button');
-  	submitButton.addEventListener('click',function(){catController.updateCurrentCat()},false);
+  	submitButton.addEventListener('click', catController.updateCurrentCat, false);
   }
 
 }
@@ -147,7 +151,6 @@ var listView = {
 		
 		listElement.addEventListener('click',(function(catCopy) {
       	return function() {
-      	console.log('add event listener: '+catCopy);
       	catController.setCurrentCat(catCopy);
       	catView.render();
       };
