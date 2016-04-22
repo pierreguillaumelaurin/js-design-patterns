@@ -5,10 +5,22 @@ var catModel = function(name, picturePath, count){
 	this.name = name;
 	this.picturePath = picturePath;
 	if (typeof count === 'undefined') { count = 0; };
-	this.count = count;
+	this.count = ko.observable(0);
+	this.level = ko.computed(function(){
+		if(this.count < 40){
+			return 'Newborn';
+		}
+		else if(this.count >= 40 && this.count < 100){
+			return 'Child';
+		}
+		else {
+			return 'Teen';
+		}
+	});
 	//append cat to list of cat
 	catList.push(this);
 }
+
 
 
 
@@ -91,9 +103,9 @@ var catView = {
 	this.bottomtext = document.getElementById('bottomtext');
   
   // add event listener
-	this.picture.addEventListener('click', function(){
+	/*this.picture.addEventListener('click', function(){
 		catController.incrementCounter(catList.currentCat);
-	});
+	});*/
 
 	//call render fnction
 	this.render();
@@ -102,7 +114,7 @@ var catView = {
 	render: function(){
     this.name.textContent = catList.currentCat.name;
     this.picture.src = catList.currentCat.picturePath;
-    this.bottomtext.textContent = "Clicked " + catList.currentCat.count + " times.";
+    //this.bottomtext.textContent = "Clicked " + catList.currentCat.count + " times.";
 
 	}
 

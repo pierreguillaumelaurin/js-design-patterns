@@ -10,8 +10,9 @@
 	</div>
 	<div id="cat">
 		<div id="name"></div>
-		<div id="picture-container"><img id="picture"></img></div>
-		<div id="bottomtext"></div>
+    <div id="level" data-bind="textInput: level"></div>
+		<div id="picture-container"><img id="picture" alt="cat" data-bind="click: incrementCounter"></img></div>
+		<div id="bottomtext" data-bind="textInput: count"></div>
   </div>
   <button type="button" id="admin-button">admin</button>
   <div id="admin-container">
@@ -22,6 +23,7 @@
   		<button id="submit-button" type="button">submit</button>
   	</form>
   </div>
+<script src="http://knockoutjs.com/downloads/knockout-3.4.0.js"></script>
 <script src= "script.js"></script>
 </body>
 </html>
