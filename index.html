@@ -10,9 +10,9 @@
 	</div>
 	<div id="cat">
 		<div id="name"></div>
-    <div id="level" data-bind="textInput: level"></div>
+    <div id="level" data-bind="text: level"></div>
 		<div id="picture-container"><img id="picture" alt="cat" data-bind="click: incrementCounter"></img></div>
-		<div id="bottomtext" data-bind="textInput: count"></div>
+		<div id="bottomtext" data-bind="text: count"></div>
   </div>
   <button type="button" id="admin-button">admin</button>
   <div id="admin-container">
@@ -25,5 +25,6 @@
   </div>
 <script src="http://knockoutjs.com/downloads/knockout-3.4.0.js"></script>
 <script src= "script.js"></script>
+<script> ko.applyBindings(catModel);</script>
 </body>
 </html>

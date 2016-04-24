@@ -6,17 +6,21 @@ var catModel = function(name, picturePath, count){
 	this.picturePath = picturePath;
 	if (typeof count === 'undefined') { count = 0; };
 	this.count = ko.observable(0);
+	this.incrementCounter = function(){
+    this.count(this.count()+1);
+	};
 	this.level = ko.computed(function(){
-		if(this.count < 40){
+		console.log(this.count());
+		if(this.count() < 40){
 			return 'Newborn';
 		}
-		else if(this.count >= 40 && this.count < 100){
+		else if(this.count() >= 40 && this.count() < 100){
 			return 'Child';
 		}
 		else {
 			return 'Teen';
 		}
-	});
+	},this);
 	//append cat to list of cat
 	catList.push(this);
 }
@@ -30,11 +34,6 @@ var catController = {
 	adminView.init();
 	listView.init();
   },
-
-	incrementCounter: function(model) {
-    model.count++;
-    catView.render();
-	},
 
 	setCurrentCat: function(cat){
 		catList.currentCat= cat;
@@ -179,6 +178,7 @@ var cat2 = new catModel('cat2', 'img-bin/black-cat.jpg');
 var cat3 = new catModel('cat3', 'img-bin/computer-cat.jpg');
 var cat4 = new catModel('cat4', 'img-bin/black-cat.jpg');
 var cat5 = new catModel('cat5', 'img-bin/computer-cat.jpg');
+
 
 //initiate currentCat
 catList.currentCat = catList[0];
